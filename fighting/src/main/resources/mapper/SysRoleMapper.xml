@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kon.fighting.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.kon.fighting.entity.SysRole">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        <!--@Table sys_role-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name_en" jdbcType="VARCHAR" property="nameEn"/>
+        <result column="name_zh" jdbcType="VARCHAR" property="nameZh"/>
+        <result column="role_desc" jdbcType="VARCHAR" property="roleDesc"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        id, name_en, name_zh, role_desc, create_time, create_user, update_time, update_user, del_flag,
+        remark
+    </sql>
+
+</mapper>

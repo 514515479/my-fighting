@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kon.fighting.mapper.SysUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.kon.fighting.entity.SysUserRole">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        <!--@Table sys_user_role-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        id, user_id, role_id
+    </sql>
+
+    <select id="selectMenuIdSetByUserId" resultType="java.lang.Long">
+        SELECT rm.menu_id FROM sys_user_role ur
+        LEFT JOIN sys_role_menu rm
+        ON ur.role_id = rm.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <!--根据用户Id获取用户角色List-->
+    <select id="selectUserRoleListByUserId" resultType="SysUserRole">
+        SELECT
+        ur.id,
+        ur.user_id,
+        ur.role_id,
+        sr.name_en role_name_en,
+        sr.name_zh role_name_zh
+        FROM
+        sys_user_role ur
+        LEFT JOIN sys_role sr
+        ON ur.role_id = sr.id
+        AND sr.del_flag = 0
+        WHERE
+        ur.user_id = #{userId}
+    </select>
+
+</mapper>

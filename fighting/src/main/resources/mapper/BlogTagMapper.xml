@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kon.fighting.mapper.BlogTagMapper">
+    <resultMap id="BaseResultMap" type="com.kon.fighting.entity.BlogTag">
+        <!--@mbg.generated generated on Fri Nov 08 14:48:20 CST 2019.-->
+        <!--@Table blog_tag-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Fri Nov 08 14:48:20 CST 2019.-->
+        id, `name`, sort, create_time, create_user, update_time, update_user, del_flag, remark
+    </sql>
+
+
+</mapper>

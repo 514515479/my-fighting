@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kon.fighting.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.kon.fighting.entity.SysUser">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        <!--@Table sys_user-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="enabled_flag" jdbcType="BIT" property="enabledFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Sat Nov 02 17:25:26 CST 2019.-->
+        id, dept_id, username, `password`, nickname, avatar, phone, email, enabled_flag,
+        create_time, create_user, update_time, update_user, del_flag, remark
+    </sql>
+
+    <!--这个会导致分页有BUG（废弃）-->
+    <!--<resultMap id="UserPageMap" type="com.kon.fighting.entity.SysUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="enabled_flag" jdbcType="BIT" property="enabledFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <collection property="roleIdList" ofType="java.lang.Long">
+            <constructor>
+                <arg column="role_id"/>
+            </constructor>
+        </collection>
+        <collection property="roleNameEnList" ofType="java.lang.String">
+            <constructor>
+                <arg column="name_en"/>
+            </constructor>
+        </collection>
+        <collection property="roleNameZhList" ofType="java.lang.String">
+            <constructor>
+                <arg column="name_zh"/>
+            </constructor>
+        </collection>
+    </resultMap>
+    <select id="selectUserPageByMap" parameterType="Map" resultMap="UserPageMap">
+        SELECT
+            su.*,
+            ur.role_id,
+            sr.name_en,
+            sr.name_zh
+        FROM
+            sys_user su
+            LEFT JOIN sys_user_role ur ON su.id = ur.user_id
+            LEFT JOIN sys_role sr ON ur.role_id = sr.id AND sr.del_flag = 0
+        WHERE
+            su.del_flag = 0
+        <if test="username != null and username != ''">
+            and su.username LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>-->
+
+    <resultMap id="UserPageMap" type="com.kon.fighting.entity.SuperUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="enabled_flag" jdbcType="BIT" property="enabledFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <collection property="roles" ofType="com.kon.fighting.entity.SysRole"
+                    select="com.kon.fighting.mapper.SysRoleMapper.selectRoleListByUserId" column="id">
+        </collection>
+    </resultMap>
+    <select id="selectUserPageByMap" parameterType="Map" resultMap="UserPageMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where del_flag = 0
+        <if test="username != null and username != ''">
+            and username LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kon.fighting.mapper.BlogArticleMapper">
+    <resultMap id="BaseResultMap" type="com.kon.fighting.entity.BlogArticle">
+        <!--@mbg.generated generated on Fri Nov 08 14:48:01 CST 2019.-->
+        <!--@Table blog_article-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="body" jdbcType="LONGVARCHAR" property="body"/>
+        <result column="tags" jdbcType="VARCHAR" property="tags"/>
+        <result column="discuss" jdbcType="INTEGER" property="discuss"/>
+        <result column="view" jdbcType="INTEGER" property="view"/>
+        <result column="draft_flag" jdbcType="BIT" property="draftFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Fri Nov 08 14:48:01 CST 2019.-->
+        id, title, body, tags, discuss, `view`, draft_flag, create_time, create_user, update_time,
+        update_user, del_flag, remark
+    </sql>
+
+    <resultMap id="BlogArticlePageMap" type="com.kon.fighting.entity.BlogArticle">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="body" jdbcType="LONGVARCHAR" property="body"/>
+        <result column="tags" jdbcType="VARCHAR" property="tags"/>
+        <result column="discuss" jdbcType="INTEGER" property="discuss"/>
+        <result column="view" jdbcType="INTEGER" property="view"/>
+        <result column="draft_flag" jdbcType="BIT" property="draftFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user" jdbcType="BIGINT" property="createUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_user" jdbcType="BIGINT" property="updateUser"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <collection property="tagList" ofType="com.kon.fighting.entity.BlogTag"
+                    select="com.kon.fighting.mapper.BlogTagMapper.selectBlogTagListByArticleId" column="id">
+        </collection>
+    </resultMap>
+    <select id="selectBlogArticlePageByMap" resultMap="BlogArticlePageMap">
+        select
+        ba.id,
+        ba.title,
+        ba.body,
+        ba.discuss,
+        ba.`view`,
+        ba.draft_flag,
+        ba.create_time,
+        ba.update_time,
+        su.nickname,
+        su.remark
+        from blog_article ba
+        left join sys_user su on ba.create_user = su.id
+        and su.del_flag = 0
+        where ba.del_flag = 0
+        <if test="title != null and title != ''">
+            and ba.title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="tags != null and tags != ''">
+            and ba.tags LIKE CONCAT('%',#{tags},'%')
+        </if>
+        <if test="draftFlag != null and draftFlag != ''">
+            and ba.draft_flag = #{draftFlag}
+        </if>
+        <if test="userId != null">
+            and ba.create_user = #{userId}
+        </if>
+        <!--以下是开放接口特有-->
+        <if test="orderByHot == null or orderByHot == '' ">
+            order by ba.create_time desc
+        </if>
+        <if test="orderByHot != null and orderByHot != '' ">
+            order by ba.`view` desc
+        </if>
+    </select>
+
+    <select id="selectBlogArticleById" resultMap="BlogArticlePageMap">
+        select
+        ba.id,
+        ba.title,
+        ba.body,
+        ba.discuss,
+        ba.`view`,
+        ba.draft_flag,
+        ba.create_time,
+        ba.update_time,
+        su.nickname,
+        su.remark
+        from blog_article ba
+        left join sys_user su on ba.create_user = su.id
+        and su.del_flag = 0
+        where ba.del_flag = 0
+        and ba.id = #{id}
+    </select>
+
+</mapper>
