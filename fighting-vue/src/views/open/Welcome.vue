@@ -1,6 +1,6 @@
 <template>
     <div class="welcomeContainer" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
-        <el-backtop target=".welcomeContainer" :right="40" :bottom="90">
+        <el-backtop target=".welcomeContainer" :right="40" :bottom="90" style="z-index: 2000;">
             <div class="back-top">UP</div>
         </el-backtop>
         <div class="f-header">

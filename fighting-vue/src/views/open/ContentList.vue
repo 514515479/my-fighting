@@ -36,7 +36,7 @@
             </el-card>
             <el-card shadow="hover" class="right-card">
                 <p>
-                    <span class="el-icon-chat-line-square right-card-title">最新评论(5)</span>
+                    <span class="el-icon-chat-line-square right-card-title">最新评论</span>
                 </p>
                 <hr/>
                 <div class="right-card-content" v-for="discuss in discussList">
@@ -50,7 +50,7 @@
             </el-card>
             <el-card shadow="hover" class="right-card">
                 <p>
-                    <span class="el-icon-document right-card-title">热门文章(5)</span>
+                    <span class="el-icon-document right-card-title">热门文章</span>
                 </p>
                 <hr/>
                 <div class="right-card-content" v-for="article in hotArticleList">
@@ -191,6 +191,7 @@
     .left-card-body {
         margin: 20px 0;
         font-size: 14px;
+        line-height: normal;
     }
 
     .left-card-footer-p {
