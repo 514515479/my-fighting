@@ -55,7 +55,7 @@ public class BlogArticleController {
     }
 
     /**
-     * 删除
+     * 删除文章，因为是伪删，所以没有删除文章与文章标签关系
      *
      * @param ids
      * @return

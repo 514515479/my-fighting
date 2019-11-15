@@ -14,7 +14,7 @@ spring:
   devtools:
     restart:
       # 热部署生效
-      enabled: false
+      enabled: true
       # 设置重启的目录
       additional-paths: src/main/java
 

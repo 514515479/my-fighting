@@ -42,10 +42,6 @@
         data() {
             return {
                 menuActiveIndex: '1',
-                loading: false,
-                noMore: false,
-                // 该变量用来处理有些页面不需要loadData
-                dynamic: true,
             }
         },
         watch: {
