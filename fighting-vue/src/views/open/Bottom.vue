@@ -23,6 +23,6 @@
 
     .line {
         width: 100%;
-        height: 15px;
+        height: 10px;
     }
 </style>

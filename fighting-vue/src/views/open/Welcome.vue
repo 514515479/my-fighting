@@ -1,6 +1,6 @@
 <template>
-    <div class="welcomeContainer" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
-        <el-backtop target=".welcomeContainer" :right="40" :bottom="90" style="z-index: 2000;">
+    <div class="welcomeContainer">
+        <el-backtop target=".welcomeContainer" :right="30" :bottom="90" style="z-index: 2000;">
             <div class="back-top">UP</div>
         </el-backtop>
         <div class="f-header">
@@ -9,7 +9,7 @@
                          @select="handleSelect">
                     <el-menu-item index="1" route="/">文章</el-menu-item>
                     <el-menu-item index="2" route="/open/messageBoard">留言板</el-menu-item>
-                    <el-menu-item index="3" route="/open/announcement">公告</el-menu-item>
+                    <el-menu-item index="3" route="/open/announcement">考虑中</el-menu-item>
                     <el-menu-item index="4" route="/login" class="item-right"
                                   v-if="$store.state.isAuthenticated === false">
                         Login
@@ -23,10 +23,6 @@
         </div>
         <div class="f-content">
             <router-view ref="targetView"/>
-            <div style="margin-top: -25px;text-align: center;">
-                <h4 v-if="loading" style="height: 30px;line-height: 30px">加载中。。。</h4>
-                <h4 v-if="noMore" style="height: 30px;line-height: 30px">没有更多了。。。</h4>
-            </div>
         </div>
         <div class="f-footer">
             <Bottom></Bottom>
@@ -67,22 +63,7 @@
                     } else {
                         this.menuActiveIndex = '';
                     }
-                    if (to.indexOf('/open/contentDetail') === -1) {
-                        this.dynamic = false;
-                        this.loading = false;
-                        this.noMore = false;
-                        this.load();
-                    } else {
-                        this.dynamic = true;
-                        this.loading = false;
-                        this.noMore = false;
-                    }
                 }
-            }
-        },
-        computed: {
-            disabled() {
-                return this.loading || this.noMore || this.dynamic;
             }
         },
         methods: {
@@ -90,21 +71,6 @@
                 if (key != null && key !== '') {
                     this.menuActiveIndex = key;
                 }
-            },
-            load() {
-                this.loading = true;
-                setTimeout(() => {
-                    this.$refs['targetView'].loadData()
-                        .then(result => {
-                            // 是否没有数据了
-                            this.noMore = result;
-                            this.loading = false;
-                        })
-                        .catch(err => {
-                            this.noMore = true;
-                            this.loading = false;
-                        });
-                }, 1000);
             },
         }
     }
@@ -136,7 +102,7 @@
 
     .f-header {
         width: 100%;
-        height: 80px;
+        height: 60px;
         position: fixed;
         top: 0;
         z-index: 2000;
@@ -153,12 +119,12 @@
     }
 
     .f-content {
-        padding: 90px 0;
+        padding: 60px 0;
     }
 
     .f-footer {
         width: 100%;
-        height: 80px;
+        height: 60px;
         position: fixed;
         bottom: 0;
         z-index: 2000;
