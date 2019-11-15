@@ -124,7 +124,6 @@
     import common from '@/utils/common'
     import dateUtils from "@/utils/date"
     import openApi from "@/api/open"
-    import tagApi from '@/api/tag'
 
     export default {
         name: "ContentList",
@@ -184,7 +183,7 @@
         },
         methods: {
             getAllTag() {
-                tagApi.getAllTag().then(res => {
+                openApi.getAllTag().then(res => {
                     this.tagList = res.data.data;
                 }).catch(err => {
                 })

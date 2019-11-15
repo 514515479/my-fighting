@@ -2,6 +2,7 @@ package com.kon.fighting.controller.open;
 
 import com.kon.fighting.common.dto.Result;
 import com.kon.fighting.service.BlogArticleService;
+import com.kon.fighting.service.BlogTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,9 @@ public class OpenController {
     @Autowired
     private BlogArticleService blogArticleService;
 
+    @Autowired
+    private BlogTagService blogTagService;
+
     /**
      * 获取发布的文章分页列表
      *
@@ -43,6 +47,16 @@ public class OpenController {
     @GetMapping("/getArticle")
     public Result getArticle(Long id) {
         return Result.okData(blogArticleService.findBlogArticleById(id));
+    }
+
+    /**
+     * 获取所有标签
+     *
+     * @return
+     */
+    @GetMapping("/getAllTag")
+    public Result getAllTag() {
+        return Result.okData(blogTagService.getAll());
     }
 
 }
