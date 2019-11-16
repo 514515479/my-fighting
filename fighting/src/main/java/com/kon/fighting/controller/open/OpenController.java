@@ -56,7 +56,7 @@ public class OpenController {
      */
     @GetMapping("/getAllTag")
     public Result getAllTag() {
-        return Result.okData(blogTagService.getAll());
+        return Result.okData(blogTagService.findAllTag());
     }
 
 }

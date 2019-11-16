@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,6 +56,16 @@ public class BlogTagService extends BaseServiceImpl<BlogTag, Long> {
         }
         example.orderBy("sort").asc();
         return this.getPageByExample(pageNum, pageSize, example);
+    }
+
+    /**
+     * 查询所有标签(根据sort排序)
+     * @return
+     */
+    public List<BlogTag> findAllTag() {
+        Example example = new Example(BlogTag.class);
+        example.orderBy("sort").asc();
+        return blogTagMapper.selectByExample(example);
     }
 
 }
