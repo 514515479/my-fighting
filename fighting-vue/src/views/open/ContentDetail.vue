@@ -87,6 +87,13 @@
         min-height: 48em;
     }
 
+    @media only screen and (max-width: 735px) {
+        .content-detail {
+            margin: 0px;
+            min-height: 48em;
+        }
+    }
+
     .content-detail-title {
         margin: 10px 0 20px 0;
     }

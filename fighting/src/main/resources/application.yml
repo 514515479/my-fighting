@@ -1,7 +1,7 @@
 # 使用哪个配置
 spring:
   profiles:
-    active: dev
+    active: @package.environment@
   servlet:
     multipart:
       # 单个文件的最大值
