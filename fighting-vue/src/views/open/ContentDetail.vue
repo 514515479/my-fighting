@@ -45,6 +45,7 @@
         },
         created() {
             this.loadData();
+            this.viewArticle();
         },
         methods: {
             loadData() {
@@ -62,6 +63,13 @@
                     }
                 }).catch(err => {
                 })
+            },
+            viewArticle() {
+                const result = sessionStorage.getItem("viewArticle:" + this.id);
+                if (result === null) {
+                    sessionStorage.setItem("viewArticle:" + this.id, "true");
+                    openApi.viewArticle(this.id).then(res => {}).catch(err => {});
+                }
             },
             goback() {
                 history.back()

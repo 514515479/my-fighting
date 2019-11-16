@@ -80,9 +80,9 @@ public class BaseEntity<T> implements Serializable {
      * 设置创建时间和创建人
      */
     public void setCreate() {
-        this.createTime = LocalDateTime.now();
         SuperUser superUser = SecurityUtils.getUser();
         if (superUser != null) {
+            this.createTime = LocalDateTime.now();
             this.setCreateUser(superUser.getId());
         }
     }
@@ -91,9 +91,9 @@ public class BaseEntity<T> implements Serializable {
      * 设置更新时间和更新人
      */
     public void setUpdate() {
-        this.updateTime = LocalDateTime.now();
         SuperUser superUser = SecurityUtils.getUser();
         if (superUser != null) {
+            this.updateTime = LocalDateTime.now();
             this.setUpdateUser(superUser.getId());
         }
     }

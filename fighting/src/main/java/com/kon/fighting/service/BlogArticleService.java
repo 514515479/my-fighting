@@ -4,11 +4,13 @@ import com.kon.fighting.common.constant.CustomStaticValue;
 import com.kon.fighting.common.dto.Page;
 import com.kon.fighting.common.persistence.BaseMapper;
 import com.kon.fighting.common.persistence.BaseServiceImpl;
-import com.kon.fighting.entity.*;
+import com.kon.fighting.entity.BlogArticle;
+import com.kon.fighting.entity.BlogArticleTag;
 import com.kon.fighting.mapper.BlogArticleMapper;
 import com.kon.fighting.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -19,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Description TODO               
+ * @Description TODO
  * @Author LK
  * @Date 2019/11/8 14:48
  * @Version V1.0
@@ -140,6 +142,31 @@ public class BlogArticleService extends BaseServiceImpl<BlogArticle, Long> {
             blogArticleTagList.add(blogArticleTag);
         }
         return blogArticleTagService.saveList(blogArticleTagList);
+    }
+
+    @Async
+    public void viewArticleAddOne(Long id) {
+        BlogArticle article = this.findBlogArticleById(id);
+        BlogArticle view = new BlogArticle();
+        view.setId(id);
+        view.setView(article.getView() + 1);
+        // 重试次数
+        int number = 0;
+        // 影响行数
+        int result = 0;
+        do {
+            result = this.updateSelective(view);
+            number++;
+            view.setView(view.getView() + 1);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (result == 0 && number < 3);
+        if (result == 0 && number == 3) {
+            log.error("更新文章{}浏览数失败。。。", id);
+        }
     }
 
 }

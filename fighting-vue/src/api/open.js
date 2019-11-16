@@ -14,6 +14,9 @@ export default {
     getArticle(id) {
         return axios.get(`/${app_name}/${app_module}/getArticle`, {params: {id: id}});
     },
+    viewArticle(id) {
+        return axios.get(`/${app_name}/${app_module}/viewArticle`, {params: {id: id}});
+    },
     getAllTag() {
         return axios.get(`/${app_name}/${app_module}/getAllTag`);
     }

@@ -30,7 +30,12 @@ public class SecurityUtils {
      * 获取用户
      **/
     public static SuperUser getUser() {
-        return (SuperUser) getAuthentication().getPrincipal();
+        Authentication authentication = getAuthentication();
+        if (authentication == null) {
+            return null;
+        } else {
+            return (SuperUser) authentication.getPrincipal();
+        }
     }
 
     /**

@@ -50,6 +50,17 @@ public class OpenController {
     }
 
     /**
+     * 查看文章
+     * @param id
+     * @return
+     */
+    @GetMapping("/viewArticle")
+    public Result viewArticle(Long id) {
+        blogArticleService.viewArticleAddOne(id);
+        return Result.okData(null);
+    }
+
+    /**
      * 获取所有标签
      *
      * @return
