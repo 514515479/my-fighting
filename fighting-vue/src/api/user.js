@@ -34,4 +34,7 @@ export default {
             }
         });
     },
+    changePassword(data) {
+        return axios.post(`/${app_name}/${app_module}/changePassword`, qs.stringify(data));
+    },
 }

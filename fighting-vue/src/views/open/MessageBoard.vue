@@ -67,7 +67,6 @@
                     customClass="dialogCustomWidth"
                     :visible.sync="dialog.show"
                     :modal-append-to-body="false"
-                    :destroy-on-close="true"
             >
                 <el-form ref="replyForm" :model="replyForm" :rules="replyRule" @submit.native.prevent>
                     <el-form-item prop="content" label="回复">

@@ -65,4 +65,16 @@ public class SysUserController {
         return Result.crud(sysUserService.deleteByIdList(ids));
     }
 
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @PostMapping("/changePassword")
+    public Result changePassword(@RequestParam("id") Long id,
+                                 @RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("password") String password) {
+        return sysUserService.changePassword(id, oldPassword, password);
+    }
+
 }

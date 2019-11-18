@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Table(name = "blog_msg_board")
-public class BlogMsgBoard extends BaseEntity implements Serializable {
+public class BlogMsgBoard extends BaseEntity<Long> implements Serializable {
 
     /**
      * 用户id

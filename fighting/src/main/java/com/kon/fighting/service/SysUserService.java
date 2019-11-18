@@ -1,6 +1,7 @@
 package com.kon.fighting.service;
 
 import com.kon.fighting.common.dto.Page;
+import com.kon.fighting.common.dto.Result;
 import com.kon.fighting.common.persistence.BaseMapper;
 import com.kon.fighting.common.persistence.BaseServiceImpl;
 import com.kon.fighting.entity.SuperUser;
@@ -116,7 +117,7 @@ public class SysUserService extends BaseServiceImpl<SysUser, Long> {
     /**
      * 新增用户角色关系
      *
-     * @param userId 用户Id
+     * @param userId     用户Id
      * @param roleIdList 角色Id集合
      * @return
      */
@@ -128,6 +129,31 @@ public class SysUserService extends BaseServiceImpl<SysUser, Long> {
             userRoleList.add(sysUserRole);
         }
         return sysUserRoleService.saveList(userRoleList);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param id       主键
+     * @param password 新密码
+     * @return
+     */
+    public Result changePassword(Long id, String oldPassword, String password) {
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
+        if (passwordEncoder.matches(oldPassword, sysUser.getPassword())) {
+            SysUser user = new SysUser();
+            user.setId(id);
+            user.setPassword(passwordEncoder.encode(password));
+            int updateNum = updateSelective(user);
+            if (updateNum > 0) {
+
+                return Result.crud(true);
+            } else {
+                return Result.crud(false);
+            }
+        } else {
+            return Result.fail("您输入的旧密码不正确");
+        }
     }
 
 }
