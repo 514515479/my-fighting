@@ -34,7 +34,12 @@ public class SecurityUtils {
         if (authentication == null) {
             return null;
         } else {
-            return (SuperUser) authentication.getPrincipal();
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof SuperUser) {
+                return (SuperUser) principal;
+            } else {
+                return null;
+            }
         }
     }
 

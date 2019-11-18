@@ -8,6 +8,7 @@ const app_name = 'api';
 const app_module = 'open';
 
 export default {
+    /* 文章 */
     getArticleList(data) {
         return axios.get(`/${app_name}/${app_module}/getArticleList`, {params: data});
     },
@@ -19,5 +20,15 @@ export default {
     },
     getAllTag() {
         return axios.get(`/${app_name}/${app_module}/getAllTag`);
-    }
+    },
+    /* 留言板 */
+    msgPage(data) {
+        return axios.get(`/${app_name}/${app_module}/msgPage`, {params: data});
+    },
+    leaveMsg(data) {
+        return axios.post(`/${app_name}/${app_module}/leaveMsg`, data);
+    },
+    replyMsg(data) {
+        return axios.post(`/${app_name}/${app_module}/replyMsg`, data);
+    },
 }

@@ -23,9 +23,9 @@ import store from './store'
 // 引入封装好的axios
 import axios from './http'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.use(ElementUI);
-Vue.use(mavonEditor)
+Vue.use(mavonEditor);
 // 将axios挂载到Vue上
 Vue.prototype.$axios = axios;
 // 将msg挂载到Vue上
@@ -35,4 +35,4 @@ new Vue({
     router,
     store,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

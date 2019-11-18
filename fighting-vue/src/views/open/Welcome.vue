@@ -1,15 +1,18 @@
 <template>
     <div class="welcomeContainer">
-        <el-backtop target=".welcomeContainer" :right="30" :bottom="90" style="z-index: 2000;">
+        <el-backtop target=".welcomeContainer" :right="15" :bottom="15" style="z-index: 2000;">
             <div class="back-top">UP</div>
         </el-backtop>
         <div class="f-header">
             <el-card class="f-card">
-                <el-menu :default-active="menuActiveIndex" class="el-menu-demo" :router="true" mode="horizontal"
+                <el-menu :default-active="menuActiveIndex"
+                         class="el-menu-demo"
+                         mode="horizontal"
+                         :router="true"
                          @select="handleSelect">
                     <el-menu-item index="1" route="/">文章</el-menu-item>
                     <el-menu-item index="2" route="/open/messageBoard">留言板</el-menu-item>
-                    <el-menu-item index="3" route="/open/announcement">考虑中</el-menu-item>
+                    <el-menu-item index="3" route="/open/announcement">关于我</el-menu-item>
                     <el-menu-item index="4" route="/login" class="item-right"
                                   v-if="$store.state.isAuthenticated === false">
                         Login
@@ -22,9 +25,12 @@
             </el-card>
         </div>
         <div class="f-content">
-            <router-view ref="targetView"/>
+            <keep-alive>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
         </div>
-        <div class="f-footer">
+        <div class="f-footer hidden-xs-only">
             <Bottom></Bottom>
         </div>
     </div>
@@ -59,6 +65,9 @@
                     } else {
                         this.menuActiveIndex = '';
                     }
+                    this.$nextTick(() => {
+                        document.getElementsByClassName("welcomeContainer")[0].scrollTop = 0;
+                    });
                 }
             }
         },
@@ -83,7 +92,7 @@
     .item-right {
         float: right !important;
         color: cornflowerblue;
-        font-weight:bold
+        font-weight: bold
     }
 
     .back-top {
@@ -101,7 +110,7 @@
         height: 60px;
         position: fixed;
         top: 0;
-        z-index: 2000;
+        z-index: 1501;
     }
 
     .f-header .el-card__body {
@@ -123,6 +132,12 @@
         height: 60px;
         position: fixed;
         bottom: 0;
-        z-index: 2000;
+        z-index: 1501;
+    }
+
+    @media only screen and (max-width: 735px) {
+        .f-content {
+            padding: 60px 0 0 0;
+        }
     }
 </style>

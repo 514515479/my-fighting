@@ -5,6 +5,7 @@ import com.kon.fighting.entity.SysMenu;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @Description 本工程特有工具类
@@ -13,6 +14,8 @@ import java.util.List;
  * @Version V1.0
  **/
 public class FightingUtils {
+
+    private static Random random = new Random();
 
     /**
      * 构造菜单树
@@ -55,6 +58,22 @@ public class FightingUtils {
             menu.setChildren(children);
             findChildrenMenu(children, menuList);
         }
+    }
+
+    /**
+     * 获取十六进制的颜色代码.例如  "#6E36B4" , For HTML ,
+     *
+     * @return String
+     */
+    public static String getRandColorCode() {
+        String r, g, b;
+        r = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        g = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        b = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        r = r.length() == 1 ? "0" + r : r;
+        g = g.length() == 1 ? "0" + g : g;
+        b = b.length() == 1 ? "0" + b : b;
+        return "#" + r + g + b;
     }
 
 }

@@ -2,10 +2,6 @@ package com.kon.fighting.common.persistence;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.kon.fighting.entity.SuperUser;
 import com.kon.fighting.utils.SecurityUtils;
 import lombok.Data;
@@ -32,13 +28,13 @@ public class BaseEntity<T> implements Serializable {
      * 主键
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private T id;
 
     /**
      * 数据创建时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "`create_time`")
     private LocalDateTime createTime;
 
@@ -80,9 +76,9 @@ public class BaseEntity<T> implements Serializable {
      * 设置创建时间和创建人
      */
     public void setCreate() {
+        this.createTime = LocalDateTime.now();
         SuperUser superUser = SecurityUtils.getUser();
         if (superUser != null) {
-            this.createTime = LocalDateTime.now();
             this.setCreateUser(superUser.getId());
         }
     }

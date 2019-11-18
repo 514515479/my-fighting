@@ -25,6 +25,7 @@ const router = new Router({
                     name: '文章页',
                     component: () => import('@/views/open/ContentList.vue'),
                     meta: {
+                        keepAlive: true,
                         requireAuth: false,
                     },
                 },
@@ -33,6 +34,7 @@ const router = new Router({
                     name: '文章详情页',
                     component: () => import('@/views/open/ContentDetail.vue'),
                     meta: {
+                        keepAlive: false,
                         requireAuth: false,
                     },
                 },
@@ -41,6 +43,7 @@ const router = new Router({
                     name: '留言板',
                     component: () => import('@/views/open/MessageBoard.vue'),
                     meta: {
+                        keepAlive: true,
                         requireAuth: false,
                     },
                 },
@@ -49,6 +52,7 @@ const router = new Router({
                     name: '公告',
                     component: () => import('@/views/open/Announcement.vue'),
                     meta: {
+                        keepAlive: true,
                         requireAuth: false,
                     },
                 },
@@ -113,7 +117,7 @@ const router = new Router({
         },
         // {path: '*',redirect: '/404'}
     ]
-})
+});
 
 // 路由守卫
 router.beforeEach((to, from, next) => {

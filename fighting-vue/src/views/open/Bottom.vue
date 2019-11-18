@@ -1,7 +1,7 @@
 <template>
     <div class="bottom">
         <div class="line"></div>
-        <h5>© 2019 Fighting [ 更新于:2019-11-15 ]</h5>
+        <h5>© 2019 Fighting [ 更新于:2019-11-18 早 ]</h5>
         <div class="line"></div>
         <h4>问题请发送到821863269@qq.com</h4>
         <div class="line"></div>

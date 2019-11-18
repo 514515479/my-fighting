@@ -1,14 +1,17 @@
 package com.kon.fighting.controller.open;
 
 import com.kon.fighting.common.dto.Result;
+import com.kon.fighting.entity.BlogMsgBoard;
+import com.kon.fighting.entity.SuperUser;
 import com.kon.fighting.service.BlogArticleService;
+import com.kon.fighting.service.BlogMsgBoardService;
 import com.kon.fighting.service.BlogTagService;
+import com.kon.fighting.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -26,6 +29,11 @@ public class OpenController {
 
     @Autowired
     private BlogTagService blogTagService;
+
+    @Autowired
+    private BlogMsgBoardService blogMsgBoardService;
+
+    // ------------------------------------文章Start----------------------------------
 
     /**
      * 获取发布的文章分页列表
@@ -51,6 +59,7 @@ public class OpenController {
 
     /**
      * 查看文章
+     *
      * @param id
      * @return
      */
@@ -69,5 +78,41 @@ public class OpenController {
     public Result getAllTag() {
         return Result.okData(blogTagService.findAllTag());
     }
+
+    // ------------------------------------文章End------------------------------------
+
+    // ----------------------------------留言板Start----------------------------------
+
+    /**
+     * 留言
+     *
+     * @return
+     */
+    @PostMapping("/leaveMsg")
+    public Result leaveMsg(HttpServletRequest request, @RequestBody BlogMsgBoard blogMsgBoard) {
+        return Result.crud(blogMsgBoardService.leaveMsg(request, blogMsgBoard));
+    }
+
+    /**
+     * 获取留言分页数据
+     *
+     * @return
+     */
+    @GetMapping("/msgPage")
+    public Result msgPage(@RequestParam Map<String, Object> map) {
+        return Result.okData(blogMsgBoardService.findMsgPage(map));
+    }
+
+    /**
+     * 回复
+     *
+     * @return
+     */
+    @PostMapping("/replyMsg")
+    public Result replyMsg(@RequestBody BlogMsgBoard blogMsgBoard) {
+        return Result.crud(blogMsgBoardService.replyMsg(blogMsgBoard));
+    }
+
+    // ----------------------------------留言板End------------------------------------
 
 }

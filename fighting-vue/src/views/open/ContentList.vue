@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-container v-infinite-scroll="load" infinite-scroll-disabled="disabled" infinite-scroll-delay="100">
-            <el-main style="width: 75%; padding-bottom: 0px; padding-right: 15px;">
+        <el-container v-infinite-scroll="load" infinite-scroll-disabled="disabled" infinite-scroll-distance="60">
+            <el-main style="width: 75%;">
                 <el-card class="search-card">
                     <el-form :inline="true" ref="searchForm" :model="searchForm" :rules="searchRule" @submit.native.prevent>
                         <el-row>
@@ -57,6 +57,10 @@
                         </p>
                     </div>
                 </el-card>
+                <div style="text-align: center;">
+                    <h4 v-if="loading" style="height: 30px; line-height: 30px;">拼命加载中。。。</h4>
+                    <h4 v-if="noMore" style="height: 30px; line-height: 30px;">我到底啦。。。</h4>
+                </div>
             </el-main>
             <el-aside style="min-width: 200px; width: 20%; padding-top: 10px;" class="hidden-xs-only">
                 <el-card shadow="hover" class="right-card">
@@ -113,10 +117,6 @@
                 </el-card>
             </el-aside>
         </el-container>
-        <div style="text-align: center">
-            <h4 v-if="loading" style="height: 30px; line-height: 30px;">拼命加载中。。。</h4>
-            <h4 v-if="noMore" style="height: 30px; line-height: 30px;">我到底啦。。。</h4>
-        </div>
     </div>
 </template>
 
@@ -147,7 +147,7 @@
                 articleList: [],
 
                 // 右边
-                introduction: 'Fighting<br />冲鸭 ! ',
+                introduction: '记录工作 and 学习<br />Fighting ! ',
                 discussList: [
                     /*{
                         name: '昵称',
@@ -266,11 +266,15 @@
                             this.noMore = true;
                             this.loading = false;
                         });
-                }, 1000);
+                }, 100);
             }
         },
         computed: {
             disabled() {
+                // 因为加了<keep-alive>，所以在disabled时候判断一下
+                if (this.$route.path !== '/') {
+                    return true;
+                }
                 return this.loading || this.noMore;
             }
         },
@@ -279,6 +283,10 @@
 
 <style>
     .el-card .el-form .el-form-item {
+        margin-bottom: 20px;
+    }
+
+    .search-card {
         margin-bottom: 20px;
     }
 
@@ -299,7 +307,8 @@
     }
 
     .left-card {
-        margin-top: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .el-card.left-card.is-hover-shadow:hover {
@@ -359,7 +368,7 @@
     }
 
     .right-card {
-        margin: 10px 10px 0px 5px;
+        margin: 10px 20px 0px 5px;
         text-align: center;
     }
 

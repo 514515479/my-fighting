@@ -1,6 +1,8 @@
 <template>
     <el-card class="content-detail">
-        <el-link :underline="false" @click="goback()"><i class="el-icon-back">Back</i></el-link>
+        <div class="content-detail-goback">
+            <el-link :underline="false" @click="goback()"><i class="el-icon-back">Back</i></el-link>
+        </div>
         <div class="content-detail-title">
             <h2 style="text-align: center">{{article.title}}</h2>
         </div>
@@ -19,8 +21,10 @@
                 </span>
             </p>
         </div>
-        <mavon-editor v-model="article.body" :toolbarsFlag="false" :subfield="false" defaultOpen="preview"
-                      style="min-height: 31em;"></mavon-editor>
+        <div>
+            <mavon-editor v-model="article.body" :toolbarsFlag="false" :subfield="false" defaultOpen="preview"
+                          style="min-height: 31em;"></mavon-editor>
+        </div>
         <div class="hidden-xs-only content-detail-footer">
             <el-popover placement="bottom" width="250px" height="250px" trigger="hover">
                 <img alt="打赏码" :src="article.remark" width="250px" height="250px"/>
@@ -72,7 +76,7 @@
                 }
             },
             goback() {
-                history.back()
+                history.back();
             },
             formatterTime(timeStr) {
                 return dateUtils.timeStrAgo(timeStr);
@@ -89,18 +93,26 @@
 
     @media only screen and (max-width: 735px) {
         .content-detail {
-            margin: 0px;
+            margin: 0;
             min-height: 48em;
+        }
+
+        .content-detail .el-card__body {
+            padding: 0;
         }
     }
 
+    .content-detail-goback {
+        margin: 20px 0 0 20px;
+    }
+
     .content-detail-title {
-        margin: 10px 0 20px 0;
+        margin: 20px 0 20px 0;
     }
 
     .content-detail-info {
         text-align: center;
-        margin: 10px 0 20px 0;
+        margin: 20px 0 20px 0;
     }
 
     .content-detail-info-p {
