@@ -27,7 +27,7 @@
         </div>
         <div class="hidden-xs-only content-detail-footer">
             <el-popover placement="bottom" width="250px" height="250px" trigger="hover">
-                <img alt="打赏码" :src="article.remark" width="250px" height="250px"/>
+                <img alt="打赏码" :src="article.remark != null ? article.remark : 'http://s9.rr.itc.cn/r/wapChange/20156_28_17/a7qnpz6737678676773.jpg'" width="250px" height="250px"/>
                 <el-button type="text" slot="reference" icon="el-icon-trophy" round>写的不错，打赏一个</el-button>
             </el-popover>
         </div>

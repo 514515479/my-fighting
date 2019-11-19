@@ -30,4 +30,7 @@ public class Constant {
     // 静态资源暴露相关
     public static final String FILE = "file:";
 
+    // 留言板楼层号
+    public static final String BLOG_MSG_BOARD_INDEX = "BlogMsgBoardService:floorIndex";
+
 }

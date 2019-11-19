@@ -76,4 +76,22 @@ public class FightingUtils {
         return "#" + r + g + b;
     }
 
+    /**
+     * 校验id是否可以删除
+     *
+     * @param ids
+     * @return
+     */
+    public static boolean checkIds(List<Long> ids) {
+        for (Long id : ids) {
+            if (id == null) {
+                continue;
+            }
+            if (id < 10000) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

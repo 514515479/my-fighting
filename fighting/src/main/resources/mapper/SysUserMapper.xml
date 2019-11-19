@@ -68,9 +68,9 @@
         FROM
             sys_user su
             LEFT JOIN sys_user_role ur ON su.id = ur.user_id
-            LEFT JOIN sys_role sr ON ur.role_id = sr.id AND sr.del_flag = 0
+            LEFT JOIN sys_role sr ON ur.role_id = sr.id AND sr.del_flag = '0'
         WHERE
-            su.del_flag = 0
+            su.del_flag = '0'
         <if test="username != null and username != ''">
             and su.username LIKE CONCAT('%',#{username},'%')
         </if>
@@ -100,7 +100,7 @@
         select
         <include refid="Base_Column_List"/>
         from sys_user
-        where del_flag = 0
+        where del_flag = '0'
         <if test="username != null and username != ''">
             and username LIKE CONCAT('%',#{username},'%')
         </if>

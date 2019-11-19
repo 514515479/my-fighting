@@ -31,4 +31,10 @@ export default {
     replyMsg(data) {
         return axios.post(`/${app_name}/${app_module}/replyMsg`, data);
     },
+    getHotArticle(data) {
+        return axios.get(`/${app_name}/${app_module}/getHotArticle`, {params: data});
+    },
+    getFilingByTime(data) {
+        return axios.get(`/${app_name}/${app_module}/getFilingByTime`, {params: data});
+    },
 }

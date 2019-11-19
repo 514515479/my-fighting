@@ -5,6 +5,7 @@ import com.kon.fighting.common.enums.MenuTypeEnum;
 import com.kon.fighting.entity.SuperUser;
 import com.kon.fighting.entity.SysMenu;
 import com.kon.fighting.service.SysMenuService;
+import com.kon.fighting.utils.FightingUtils;
 import com.kon.fighting.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -109,6 +110,10 @@ public class SysMenuController {
      */
     @DeleteMapping
     public Result delete(@RequestParam("ids") List<Long> ids) {
+        boolean res = FightingUtils.checkIds(ids);
+        if (!res) {
+            return Result.fail("你想干什么？？？");
+        }
         int num = sysMenuService.deleteByIdList(ids);
         this.clearCache(num, null);
         return Result.crud(num);

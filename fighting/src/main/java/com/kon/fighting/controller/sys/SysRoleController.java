@@ -5,6 +5,7 @@ import com.kon.fighting.common.dto.Result;
 import com.kon.fighting.entity.SysRole;
 import com.kon.fighting.service.SysRoleMenuService;
 import com.kon.fighting.service.SysRoleService;
+import com.kon.fighting.utils.FightingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +93,10 @@ public class SysRoleController {
      */
     @DeleteMapping
     public Result delete(@RequestParam("ids") List<Long> ids) {
+        boolean res = FightingUtils.checkIds(ids);
+        if (!res) {
+            return Result.fail("你想干什么？？？");
+        }
         return Result.crud(sysRoleService.deleteByIdList(ids));
     }
 

@@ -73,4 +73,8 @@ public class BlogMsgBoard extends BaseEntity<Long> implements Serializable {
     @Transient
     private List<BlogMsgBoard> replyList;
 
+    /**
+     * 这个实体的备注作为楼层号
+     */
+
 }

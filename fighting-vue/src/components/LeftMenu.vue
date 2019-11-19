@@ -68,10 +68,6 @@
         border: none;
     }
 
-    .fa-margin {
-        margin-right: 5px;
-    }
-
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 180px;
         min-height: 400px;

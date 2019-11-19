@@ -32,7 +32,7 @@
         sys_user_role ur
         LEFT JOIN sys_role sr
         ON ur.role_id = sr.id
-        AND sr.del_flag = 0
+        AND sr.del_flag = '0'
         WHERE
         ur.user_id = #{userId}
     </select>

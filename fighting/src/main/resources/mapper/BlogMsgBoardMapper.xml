@@ -47,9 +47,15 @@
     <select id="selectBlogMsgBoardPageByMap" resultMap="BlogMsgBoardPageMap">
         select bsd.*, su.nickname
         from blog_msg_board bsd
-        left join sys_user su on bsd.user_id = su.id and su.del_flag = 0
-        where bsd.del_flag = 0
+        left join sys_user su on bsd.user_id = su.id and su.del_flag = '0'
+        where bsd.del_flag = '0'
         and parent_id = 0
+        <if test="name != null and name != ''">
+            and bsd.name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="nickname != null and nickname != ''">
+            and su.nickname like CONCAT('%',#{nickname},'%')
+        </if>
         ORDER BY bsd.create_time DESC
     </select>
 
@@ -59,5 +65,9 @@
         where bsd.user_id = su.id
         and parent_id = #{parentId}
         ORDER BY bsd.create_time ASC
+    </select>
+
+    <select id="getMaxFloorIndex" resultType="java.lang.Integer">
+        select max(remark) from blog_msg_board
     </select>
 </mapper>

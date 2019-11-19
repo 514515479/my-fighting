@@ -8,6 +8,7 @@ import com.kon.fighting.entity.BlogArticle;
 import com.kon.fighting.entity.BlogArticleTag;
 import com.kon.fighting.mapper.BlogArticleMapper;
 import com.kon.fighting.utils.SecurityUtils;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -167,6 +168,24 @@ public class BlogArticleService extends BaseServiceImpl<BlogArticle, Long> {
         if (result == 0 && number == 3) {
             log.error("更新文章{}浏览数失败。。。", id);
         }
+    }
+
+    /**
+     * 获取热门文章
+     *
+     * @return
+     */
+    public List<BlogArticle> findHotBlogArticle(int num) {
+        return blogArticleMapper.selectHotBlogArticle(num);
+    }
+
+    /**
+     * 获取文章归档
+     *
+     * @return
+     */
+    public List<Map<String, Object>> findBlogArticleFilingByTime(int num) {
+        return blogArticleMapper.selectBlogArticleFilingByTime(num);
     }
 
 }

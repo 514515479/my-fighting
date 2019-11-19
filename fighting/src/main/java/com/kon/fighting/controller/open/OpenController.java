@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Description TODO
+ * @Description 博客首页内容控制器
  * @Author LK
  * @Date 2019/11/10 13:17
  * @Version V1.0
@@ -34,6 +34,26 @@ public class OpenController {
     private BlogMsgBoardService blogMsgBoardService;
 
     // ------------------------------------文章Start----------------------------------
+
+    /**
+     * 获取最热文章
+     *
+     * @return
+     */
+    @GetMapping("/getHotArticle")
+    public Result getHotArticle(@RequestParam(required = false, defaultValue = "5") Integer num) {
+        return Result.okData(blogArticleService.findHotBlogArticle(num));
+    }
+
+    /**
+     * 获取文章归档
+     *
+     * @return
+     */
+    @GetMapping("/getFilingByTime")
+    public Result getFilingByTime(@RequestParam(required = false, defaultValue = "5") Integer num) {
+        return Result.okData(blogArticleService.findBlogArticleFilingByTime(num));
+    }
 
     /**
      * 获取发布的文章分页列表

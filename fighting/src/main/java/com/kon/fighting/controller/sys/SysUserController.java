@@ -3,6 +3,7 @@ package com.kon.fighting.controller.sys;
 import com.kon.fighting.common.dto.Result;
 import com.kon.fighting.entity.SysUser;
 import com.kon.fighting.service.SysUserService;
+import com.kon.fighting.utils.FightingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +63,10 @@ public class SysUserController {
      */
     @DeleteMapping
     public Result delete(@RequestParam("ids") List<Long> ids) {
+        boolean res = FightingUtils.checkIds(ids);
+        if (!res) {
+            return Result.fail("你想干什么？？？");
+        }
         return Result.crud(sysUserService.deleteByIdList(ids));
     }
 

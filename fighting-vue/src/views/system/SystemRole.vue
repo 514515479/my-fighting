@@ -323,7 +323,7 @@
                     // 清空节点
                     this.$refs['menuTree'].setCheckedKeys([]);
                     // 打开所有节点
-                    this.openTree();
+                    //this.openTree();
                     // 回填选中节点
                     this.setTreeCheckedKeys(row.id);
                 })

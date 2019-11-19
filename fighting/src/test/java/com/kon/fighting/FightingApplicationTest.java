@@ -1,10 +1,12 @@
 package com.kon.fighting;
 
+import com.kon.fighting.utils.RedisUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,6 +33,11 @@ public class FightingApplicationTest {
     public void encryptedPassword() {
         String password = "fighting";
         System.out.println(new BCryptPasswordEncoder().encode(password));
+    }
+
+    @Ignore
+    @Test
+    public void test() {
     }
 
 }

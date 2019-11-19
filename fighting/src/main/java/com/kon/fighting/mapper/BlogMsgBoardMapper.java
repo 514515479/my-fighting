@@ -18,4 +18,6 @@ public interface BlogMsgBoardMapper extends BaseMapper<BlogMsgBoard> {
 
     List<BlogMsgBoard> selectReplyMsgByParentId(Long parentId);
 
+    Integer getMaxFloorIndex();
+
 }

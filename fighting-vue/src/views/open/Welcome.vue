@@ -12,7 +12,7 @@
                          @select="handleSelect">
                     <el-menu-item index="1" route="/">文章</el-menu-item>
                     <el-menu-item index="2" route="/open/messageBoard">留言板</el-menu-item>
-                    <el-menu-item index="3" route="/open/announcement">关于我</el-menu-item>
+                    <el-menu-item index="3" route="/open/about">关于</el-menu-item>
                     <el-menu-item index="4" route="/login" class="item-right"
                                   v-if="$store.state.isAuthenticated === false">
                         Login
@@ -60,7 +60,7 @@
                         this.menuActiveIndex = '1';
                     } else if (to === '/open/messageBoard') {
                         this.menuActiveIndex = '2';
-                    } else if (to === '/open/announcement') {
+                    } else if (to === '/open/about') {
                         this.menuActiveIndex = '3';
                     } else {
                         this.menuActiveIndex = '';

@@ -48,9 +48,9 @@ const router = new Router({
                     },
                 },
                 {
-                    path: 'open/announcement',
-                    name: '公告',
-                    component: () => import('@/views/open/Announcement.vue'),
+                    path: 'open/about',
+                    name: '关于',
+                    component: () => import('@/views/open/About.vue'),
                     meta: {
                         keepAlive: true,
                         requireAuth: false,

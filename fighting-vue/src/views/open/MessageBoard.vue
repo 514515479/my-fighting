@@ -25,10 +25,10 @@
                     <el-timeline>
                         <template v-for="(msg,index) in messageList">
                             <el-timeline-item :timestamp="msg.createTime" placement="top" size="large"
-                                              :color="msg.color">
+                                              :color="msg.color" :icon="msg.icon">
                                 <el-card>
-                                    <p class="msg" v-if="msg.name !== null">
-                                        <span class="floor-num">{{total - index}} 楼</span>网友：{{msg.name}}
+                                    <p class="msg" v-if="msg.name !== null && msg.name !== ''">
+                                        <span class="floor-num">{{msg.remark}} 楼</span>网友：{{msg.name}}
                                         &nbsp;<el-button v-if="$store.state.isAuthenticated === true"
                                                          type="success"
                                                          size="mini" icon="view"
@@ -36,7 +36,7 @@
                                         </el-button>
                                     </p>
                                     <p class="msg" v-if="msg.name === null">
-                                        <span class="floor-num">{{total - index}} 楼</span>留言者：{{msg.nickname}}
+                                        <span class="floor-num">{{msg.remark}} 楼</span>留言者：{{msg.nickname}}
                                         &nbsp;<el-button v-if="$store.state.isAuthenticated === true"
                                                          type="success"
                                                          size="mini" icon="view"
@@ -103,8 +103,7 @@
                 },
                 total: 0,
                 dataForm: {
-                    content: '',
-                    parentId: 0,
+                    content: ''
                 },
                 dataRule: {
                     content: [
@@ -243,10 +242,12 @@
 
     .message-board h3 {
         margin: 20px;
+        line-height: normal;
     }
 
     .message-board h4 {
         margin: 10px;
+        line-height: normal;
     }
 
     .msg {

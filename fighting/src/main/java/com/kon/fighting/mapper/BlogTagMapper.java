@@ -23,7 +23,7 @@ public interface BlogTagMapper extends BaseMapper<BlogTag> {
      */
     @Select("select bt.* from blog_tag bt,blog_article_tag bat \n" +
             "where bt.id = bat.tag_id \n" +
-            "and bt.del_flag = 0 \n" +
+            "and bt.del_flag = '0' \n" +
             "and bat.article_id = #{articleId} \n" +
             "order by bt.sort")
     List<BlogTag> selectBlogTagListByArticleId(Long articleId);

@@ -3,7 +3,8 @@
         <el-container v-infinite-scroll="load" infinite-scroll-disabled="disabled" infinite-scroll-distance="60">
             <el-main style="width: 75%;">
                 <el-card class="search-card">
-                    <el-form :inline="true" ref="searchForm" :model="searchForm" :rules="searchRule" @submit.native.prevent>
+                    <el-form :inline="true" ref="searchForm" :model="searchForm" :rules="searchRule"
+                             @submit.native.prevent>
                         <el-row>
                             <el-col :xs="24" :lg="8">
                                 <el-form-item prop="title" label="标题">
@@ -29,8 +30,8 @@
                             </el-col>
                             <el-col :xs="24" :lg="8">
                                 <el-form-item style="text-align: center;">
-                                    <el-button type="primary" icon="view" @click="handleSearch">查询</el-button>
                                     <el-button type="warning" icon="view" @click="handleReset">重置</el-button>
+                                    <el-button type="primary" icon="view" @click="handleSearch">查询</el-button>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -93,9 +94,11 @@
                     </p>
                     <hr/>
                     <div class="right-card-content" v-for="article in hotArticleList">
-                        <p @click="toArticle(article.articleId)">
-                            《{{ article.articleTitle }}》 浏览数 : {{ article.view }}
+                        <p @click="toArticle(article.id)">
+                            《<span style="font-weight: bold">{{ article.title }}</span>》浏览数:
+                            <span style="font-weight: bold">{{ article.view }}</span>
                         </p>
+                        <br />
                     </div>
                     <div class="right-card-content" v-if="hotArticleList.length === 0">
                         <h1>暂无热门文章</h1>
@@ -156,20 +159,8 @@
                         articleTitle: '文章标题',
                     }*/
                 ],
-                hotArticleList: [
-                    /*{
-                        articleId: 666,
-                        articleTitle: '文章标题',
-                        view: 666,
-                    }*/
-                ],
-                articlePigeonholeList: [
-                    /*{
-                        year: 2019,
-                        month: 11,
-                        count: 1,
-                    }*/
-                ],
+                hotArticleList: [],
+                articlePigeonholeList: [],
                 // 无限滚动
                 loading: false,
                 noMore: false,
@@ -178,10 +169,24 @@
         // created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
         // mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
         created() {
-            // 获取所有文章标签
             this.getAllTag();
+            this.getHotArticle();
+            this.getFilingByTime();
         },
         methods: {
+            // 获取热门文章
+            getHotArticle() {
+                openApi.getHotArticle().then(res => {
+                    this.hotArticleList = res.data.data;
+                }).catch(err => {})
+            },
+            // 获取文章归档
+            getFilingByTime() {
+                openApi.getFilingByTime().then(res => {
+                    this.articlePigeonholeList = res.data.data;
+                }).catch(err => {})
+            },
+            // 获取所有文章标签
             getAllTag() {
                 openApi.getAllTag().then(res => {
                     this.tagList = res.data.data;
