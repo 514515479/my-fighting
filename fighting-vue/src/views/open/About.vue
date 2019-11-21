@@ -13,8 +13,7 @@
                             <div><h2>联系电话：18650477443</h2></div>
                             <div><h2>学历：专科（以前不会读书，现在感觉蛮可惜的~）</h2></div>
                             <div><h2>爱好：自由散漫（哈哈）</h2></div>
-                            <div><h2>目前没有对象（希望有个前端或UI妹子，手动滑稽）</h2></div>
-                            <div><h2>目前自由职业,希望脱离现状</h2></div>
+                            <div><h2>目前没有对象</h2></div>
                         </el-collapse-item>
                         <el-collapse-item>
                             <template slot="title">
